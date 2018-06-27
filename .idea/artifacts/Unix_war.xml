@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="Unix:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="unix服务器租赁系统.war">
+    <root id="archive" name="unix服务器租赁系统-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="Unix:war exploded" />
     </root>
   </artifact>
