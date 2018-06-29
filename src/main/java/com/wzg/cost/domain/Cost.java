@@ -1,4 +1,4 @@
-package com.wzg.domain;
+package com.wzg.cost.domain;
 
 
 import java.security.Timestamp;
