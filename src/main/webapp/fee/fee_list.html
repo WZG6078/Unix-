@@ -2,7 +2,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="/jq/jquery-3.2.1.min.js" type="text/javascript"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
@@ -18,20 +17,87 @@
                 contentType: "application/json",
                 success: function (data) {
                     if (data) {
+                        alert(JSON.stringify(data));
                         //解析json生成表格
                         createShowingTable(data);
                     }
                 }, error: function (data) {
                     if (!data) {
-                        alert("您的数据有问题");
+                        alert("您的数据有问题")
                         return;
                     }
                 }
             });
         }
         //生成表格
-        function createShowingTable(data){
-            documnet.createTable
+        function createShowingTable(data) {
+            var costTable = document.getElementById("datalist");
+
+           var tr;
+            for (var i in data) {//遍历json数组时，这么写p为索引，0,1
+                tr = document.createElement("tr");
+                var costId = data[i].cost_id;
+                var costName = data[i].name;
+                var baseDuration = data[i].base_duration;
+                var baseCost = data[i].base_cost;
+                var unitCost = data[i].unit_cost;
+                var createTime = data[i].creatime;
+                var startime = data[i].startime;
+                var status = data[i].status;
+
+                // 创建一行的数据
+                var cost_id = document.createElement("td");
+                cost_id.innerHTML = costId;
+                var name = document.createElement("td");
+                name.innerHTML = costName;
+                var base_duration = document.createElement("td");
+                base_duration.innerHTML = baseDuration;
+                var base_cost = document.createElement("td");
+                base_cost.innerHTML = baseCost;
+                var unit_cost = document.createElement("td");
+                unit_cost.innerHTML = unitCost;
+                var create_time = document.createElement("td");
+                create_time.innerHTML = createTime;
+                var start_time = document.createElement("td");
+                start_time.innerHTML = startime;
+                var cost_status = document.createElement("td");
+                cost_status.innerHTML = status;
+                var costInput = document.createElement("td");
+                var input1 = document.createElement("input");
+                var input2 = document.createElement("input");
+                var input3 = document.createElement("input");
+                input1.setAttribute("type","button");
+                input1.setAttribute("value","启用");
+                input1.setAttribute("class","btn_start");
+                input1.setAttribute("onclick","startFee()");
+                input2.setAttribute("type","button");
+                input2.setAttribute("value","修改");
+                input2.setAttribute("class","btn_modify");
+                input2.setAttribute("onclick","location.href='fee_modi.html");
+                input3.setAttribute("type","button");
+                input3.setAttribute("value","删除");
+                input3.setAttribute("class","btn_delete");
+                input3.setAttribute("onclick","deleteFee()");
+
+
+
+
+                tr.appendChild(cost_id);
+                tr.appendChild(name);
+                tr.appendChild(base_duration);
+                tr.appendChild(base_cost);
+                tr.appendChild(unit_cost);
+                tr.appendChild(create_time);
+                tr.appendChild(start_time);
+                tr.appendChild(cost_status);
+                costInput.appendChild(input1);
+                costInput.appendChild(input2);
+                costInput.appendChild(input3);
+                tr.appendChild(costInput);
+                costTable.appendChild(tr)
+            }
+
+
         }
         //排序按钮的点击事件
         function sort(btnObj) {
@@ -106,21 +172,7 @@
                     <th class="width50">状态</th>
                     <th class="width200"></th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="fee_detail.html">包 20 小时</a></td>
-                    <td>20 小时</td>
-                    <td>24.50 元</td>
-                    <td>3.00 元/小时</td>
-                    <td>2013/01/01 00:00:00</td>
-                    <td></td>
-                    <td>暂停</td>
-                    <td>
-                        <input type="button" value="启用" class="btn_start" onclick="startFee();"/>
-                        <input type="button" value="修改" class="btn_modify" onclick="location.href='fee_modi.html';"/>
-                        <input type="button" value="删除" class="btn_delete" onclick="deleteFee();"/>
-                    </td>
-                </tr>
+
 
             </table>
             <p>业务说明：<br/>
