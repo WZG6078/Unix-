@@ -1,7 +1,7 @@
 package com.wzg.cost.domain;
 
 
-import java.security.Timestamp;
+import java.util.Date;
 
 /**
  * @author wzeg@foxmail.com
@@ -16,14 +16,14 @@ public class Cost {
     private Double unit_cost;
     private String status;
     private String descr;
-    private Timestamp creatime;
-    private Timestamp startime;
+    private Date creatime;
+    private Date startime;
     private String cost_type;
 
     public Cost() {
     }
 
-    public Cost(Integer cost_id, String name, Integer base_duration, Double base_cost, Double unit_cost, String status, String descr, Timestamp creatime, Timestamp startime, String cost_type) {
+    public Cost(Integer cost_id, String name, Integer base_duration, Double base_cost, Double unit_cost, String status, String descr, Date creatime, Date startime, String cost_type) {
         this.cost_id = cost_id;
         this.name = name;
         this.base_duration = base_duration;
@@ -99,20 +99,20 @@ public class Cost {
         return this;
     }
 
-    public Timestamp getCreatime() {
+    public Date getCreatime() {
         return creatime;
     }
 
-    public Cost setCreatime(Timestamp creatime) {
+    public Cost setCreatime(Date creatime) {
         this.creatime = creatime;
         return this;
     }
 
-    public Timestamp getStartime() {
+    public Date getStartime() {
         return startime;
     }
 
-    public Cost setStartime(Timestamp startime) {
+    public Cost setStartime(Date startime) {
         this.startime = startime;
         return this;
     }
