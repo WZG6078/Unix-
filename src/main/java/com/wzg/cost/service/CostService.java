@@ -13,4 +13,11 @@ import java.util.List;
 public interface CostService {
     //查询所有Cost数据
     List<Cost> findAllCost();
+    // 添加cost信息
+    void addAllCost(Cost cost);
+    // 根据costId进行删除
+    void deleteCostById(int costId);
+    // 修改时根据传过来的Id去查询对应的数据
+    Cost findCurrentCost(int costId);
+
 }

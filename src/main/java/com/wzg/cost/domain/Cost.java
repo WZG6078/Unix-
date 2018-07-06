@@ -19,6 +19,8 @@ public class Cost {
     private Date creatime;
     private Date startime;
     private String cost_type;
+    //判断是否存在ID进行修改还是添加
+    private int count;
 
     public Cost() {
     }
@@ -123,6 +125,15 @@ public class Cost {
 
     public Cost setCost_type(String cost_type) {
         this.cost_type = cost_type;
+        return this;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public Cost setCount(int count) {
+        this.count = count;
         return this;
     }
 

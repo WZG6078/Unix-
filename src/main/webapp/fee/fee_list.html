@@ -12,18 +12,17 @@
         Date.prototype.toLocaleString = function () {
             return this.getFullYear() + "/" + (this.getMonth() + 1) + "/" + this.getDate() + "/ " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
         };
+
         //查询所有的cost数据
         function findAllCost() {
             $.ajax({
                 url: "/findAllCost",
-                type: "GET",
+                type: "POST",
                 dataType: "json",
-                contentType: "application/json",
+                contentType: "application/json;charset=utf-8'",
                 success: function (data) {
                     if (data) {
-                        alert(JSON.stringify(data));
-
-                        for (var i = 0; i <= data.length; i++) {
+                        for (i in data) {
                             var cost = data[i];
                             //解析json生成表格
                             createShowingTable(cost);
@@ -41,13 +40,16 @@
                 }
             });
         }
+
+
         //设置cost 的status
-      function setCostStatus(cost) {
-          if (cost.status == "1"){
-              return "开通"
-          }
-          return "暂停"
-      }
+        function setCostStatus(cost) {
+            if (cost.status == "1") {
+                return "开通"
+            }
+            return "暂停"
+        }
+
 
         //生成表格
         function createShowingTable(data) {
@@ -91,7 +93,7 @@
             input2.setAttribute("type", "button");
             input2.setAttribute("value", "修改");
             input2.setAttribute("class", "btn_modify");
-            input2.setAttribute("onclick", "location.href='fee_modi.html");
+            input2.setAttribute("onclick", "update(" + data.cost_id + ")");
 
             var input3 = document.createElement("input");
             input3.setAttribute("type", "button");
@@ -132,11 +134,40 @@
             document.getElementById("operate_result_info").style.display = "block";
         }
 
+        //修改
+        function update(costid) {
+            var costId = JSON.stringify(costid);
+            alert(costId);
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset=utf-8',
+                url: '/findCurrentCost',
+                data: costId,
+                success: function () {
+                    window.location.href = "fee_modi.html"
+                }
+            })
+        }
+
 
         //删除
-        function deleteFee() {
+        function deleteFee(costId) {
             var r = window.confirm("确定要删除此资费吗？");
-            document.getElementById("operate_result_info").style.display = "block";
+
+            var cost_id = JSON.stringify(costId);
+            alert(cost_id);
+            if (cost_id) {
+                $.ajax({
+                    type: "POST",
+                    url: "/deleteCostById",
+                    contentType: "application/json;charset=utf-8",
+                    data: cost_id,
+                    success: function () {
+                        document.getElementById("operate_result_info").style.display = "block";
+                        window.location.href = "fee_list.html"
+                    }
+                })
+            }
         }
     </script>
 </head>

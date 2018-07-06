@@ -3,7 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wzg.cost.dao.CostDao">
+    <!--查询资费管理-->
+
+    <!--查询所有-->
     <select id="findAllCost" resultType="com.wzg.cost.domain.Cost">
-        SELECT * FROM cost
+        SELECT *
+        FROM cost
     </select>
+    <!--添加功能-->
+    <insert id="addAllCost" parameterType="com.wzg.cost.domain.Cost">
+
+        <if test="count > 0">
+            UPDATE cost
+            SET name= #{name}, base_duration = #{base_duration}, base_cost = #{base_cost}, unit_cost = #{unit_cost},
+            descr = #{descr}, creatime = #{creatime}, startime = #{startime}, cost_type = #{cost_type}
+            WHERE cost_id = #{costId}
+        </if>
+        <if test="count == 0">
+            INSERT INTO cost (name, base_duration, base_cost, unit_cost, status, descr, creatime, startime, cost_type)
+            VALUES (#{name}, #{base_duration}, #{base_cost}, #{unit_cost}, #{status}, #{descr}, #{creatime},
+            #{startime},
+            #{cost_type})
+        </if>
+    </insert>
+    <!--删除功能-->
+    <delete id="deleteCostById" parameterType="int">
+        DELETE FROM cost
+        WHERE cost_id = #{costId}
+    </delete>
+    <!--修改时查询当前数据-->
+    <select id="findCurrentCost" parameterType="int" resultType="com.wzg.cost.domain.Cost">
+        SELECT *
+        FROM cost
+        WHERE cost_id = #{costId}
+    </select>
+    <!--修改数据-->
+
 </mapper>

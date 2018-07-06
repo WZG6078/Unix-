@@ -20,4 +20,19 @@ public class CostServiceImpl implements CostService {
     public List<Cost> findAllCost() {
         return costDao.findAllCost();
     }
+
+    @Override
+    public void addAllCost(Cost cost) {
+        costDao.addAllCost(cost);
+    }
+
+    @Override
+    public void deleteCostById(int costId) {
+        costDao.deleteCostById(costId);
+    }
+
+    @Override
+    public Cost findCurrentCost(int costId) {
+        return costDao.findCurrentCost(costId);
+    }
 }
